@@ -1,73 +1,172 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# NestJS 项目文档
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## 简介
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+这是一个使用 NestJS 框架开发的项目，包含用户模块和登录模块。用户模块提供了用户的增删改查功能，登录模块实现了基于 JWT 的登录认证功能。
 
-## Description
+## 目录
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- [NestJS 项目文档](#nestjs-项目文档)
+  - [简介](#简介)
+  
+  - [目录](#目录)
+  
+  - [安装与运行](#安装与运行)
+  
+  - [用户模块](#用户模块)
+    - [获取用户列表](#获取用户列表)
+    - [获取单个用户](#获取单个用户)
+    - [创建用户](#创建用户)
+    - [更新用户](#更新用户)
+    - [删除用户](#删除用户)
+    
+  - [登录模块](#登录模块)
+    - [登录](#登录)
+    
+  - [菜单模块](#菜单模块)
+    - [获取菜单列表](#获取菜单列表)
+    - [获取单个菜单](#获取单个菜单)
+    - [创建菜单](#创建菜单)
+    - [更新菜单](#更新菜单)
+    - [删除菜单](#删除菜单)
+    
+  - [角色模块](#角色模块)
+    - [获取角色列表](#获取角色列表)
+    - [获取单个角色](#获取单个角色)
+    - [创建角色](#创建角色)
+    - [更新角色](#更新角色)
+    - [删除角色](#删除角色)
+    - [获取菜单列表](#获取菜单列表-1)
+    - [获取单个菜单](#获取单个菜单-1)
+    - [创建菜单](#创建菜单-1)
+    - [更新菜单](#更新菜单-1)
+    - [删除菜单](#删除菜单-1)
+    
+  - [角色模块](#角色模块-1)
+    - [获取角色列表](#获取角色列表-1)
+    - [获取单个角色](#获取单个角色-1)
+    - [创建角色](#创建角色-1)
+    - [更新角色](#更新角色-1)
+    - [删除角色](#删除角色-1)
+    
+  - [权限模块](#权限模块)
+    
+    - [获取权限列表](#获取权限列表) 
+    
+    - [获取单个权限](#获取单个权限)  
+    - [创建权限](#创建权限)  
+    - [更新权限](#更新权限)  
+    - [删除权限](#删除权限)
+    
+  - 
 
-## Installation
 
-```bash
-$ pnpm install
-```
 
-## Running the app
+## 安装与运行
 
-```bash
-# development
-$ pnpm run start
+1. 克隆项目仓库：
 
-# watch mode
-$ pnpm run start:dev
+    ```bash
+    git clone https://github.com/your-repository/nestjs-project.git
+    cd nestjs-project
+    ```
 
-# production mode
-$ pnpm run start:prod
-```
+2. 安装依赖：
 
-## Test
+    ```bash
+    npm install
+    ```
 
-```bash
-# unit tests
-$ pnpm run test
+3. 运行应用：
 
-# e2e tests
-$ pnpm run test:e2e
+    ```bash
+    npm run start
+    ```
 
-# test coverage
-$ pnpm run test:cov
-```
+## 用户模块
 
-## Support
+### 获取用户列表
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### 获取单个用户
 
-## License
 
-Nest is [MIT licensed](LICENSE).
+
+### 创建用户
+
+
+
+### 更新用户
+
+
+
+### 删除用户
+
+
+## 登录模块
+
+### 登录
+
+
+## 菜单模块
+
+### 获取菜单列表
+
+### 获取单个菜单
+
+### 创建菜单
+
+### 更新菜单
+
+### 删除菜单
+
+## 角色模块
+
+### 获取角色列表
+
+### 获取单个角色
+
+### 创建角色
+
+### 更新角色
+
+### 删除角色
+
+### 获取菜单列表
+
+### 获取单个菜单
+
+### 创建菜单
+
+### 更新菜单
+
+### 删除菜单
+
+## 角色模块
+
+### 获取角色列表
+
+### 获取单个角色
+
+### 创建角色
+
+### 更新角色
+
+### 删除角色
+
+
+
+
+
+## 角色模块
+
+### 获取角色列表
+
+### 获取单个角色
+
+### 创建角色
+
+### 更新角色
+
+### 删除角色
