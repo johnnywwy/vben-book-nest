@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   // // TODO: 登录验证
-  async login(username) {
+  async login(username: string, password: string) {
     const user = await this.userService.findByUsername(username);
     return 'This action returns a token' + user;
   }

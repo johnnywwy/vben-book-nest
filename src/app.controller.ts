@@ -11,19 +11,19 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
+  // @Get()
+  // getHello(): string {
+  //   return this.appService.getHello();
+  // }
 
-  @Get('/test')
-  test(): string {
-    return this.appService.test();
-  }
+  // @Get('/test')
+  // test(): string {
+  //   return this.appService.test();
+  // }
 
-  @Get('/data/:id')
-  // @UseFilters(new HttpExceptionFilter())
-  getData(@Param() params): string {
-    return this.appService.getData(params);
-  }
+  // @Get('/data/:id')
+  // // @UseFilters(new HttpExceptionFilter())
+  // getData(@Param() params): string {
+  //   return this.appService.getData(params);
+  // }
 }
