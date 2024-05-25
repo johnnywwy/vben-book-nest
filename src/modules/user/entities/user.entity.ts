@@ -14,10 +14,10 @@ export class User {
   username: string;
 
   @Column({
-    type: 'varchar',
-    length: 255,
+    // type: 'varchar',
+    // length: 255,
     comment: '密码',
-    select: false, // 查询时不返回该字段
+    // select: false, // 查询时不返回该字段
   })
   password: string;
 
