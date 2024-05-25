@@ -2,25 +2,52 @@ import { Entity, Column, Unique, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('user')
 export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    length: 255,
+    comment: '用户名',
+  })
   @Unique(['username'])
   username: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    length: 255,
+    comment: '密码',
+    select: false, // 查询时不返回该字段
+  })
   password: string;
 
-  @Column()
-  avatar: string;
+  @Column({
+    type: 'varchar',
+    length: 255,
+    comment: '邮箱',
+    nullable: true,
+  })
+  email: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    length: 255,
+    comment: '角色',
+    default: '',
+  })
   role: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    length: 255,
+    comment: '昵称',
+    nullable: true,
+  })
   nickname: string;
 
-  @Column()
+  @Column({
+    comment: '头像',
+    nullable: true,
+  })
   active: number;
 }

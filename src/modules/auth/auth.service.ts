@@ -5,7 +5,7 @@ import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AuthService {
-  constructor() {} // private readonly userService: UserService
+  constructor(private userService: UserService) {} // private readonly userService: UserService
 
   create(createAuthDto: CreateAuthDto) {
     return 'This action adds a new auth';
@@ -15,21 +15,21 @@ export class AuthService {
     return `This action returns all auth`;
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} auth`;
   }
 
-  update(id: number, updateAuthDto: UpdateAuthDto) {
+  update(id: string, updateAuthDto: UpdateAuthDto) {
     return `This action updates a #${id} auth`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} auth`;
   }
 
   // // TODO: 登录验证
-  // async login(username) {
-  //   // const user = await this.userService.findByUsername(username);
-  //   // return 'This action returns a token';
-  // }
+  async login(username) {
+    const user = await this.userService.findByUsername(username);
+    return 'This action returns a token' + user;
+  }
 }

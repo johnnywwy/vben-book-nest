@@ -6,7 +6,7 @@ import { AuthGuard } from 'src/guards/auth.guard';
 import { UserModule } from '../user/user.module';
 
 @Module({
-  // imports: [UserModule],
+  imports: [UserModule],
   controllers: [AuthController],
 
   //第一种 局部认证 在controller中使用 useGuards(AuthGuard)

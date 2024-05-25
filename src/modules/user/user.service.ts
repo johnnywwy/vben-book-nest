@@ -9,7 +9,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private readonly usersRepository: Repository<User>,
+    private readonly userRepository: Repository<User>,
   ) {} // private readonly userRepository: Repository<User>
 
   create(createUserDto: CreateUserDto) {
@@ -20,21 +20,21 @@ export class UserService {
     return `This action returns all user`;
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     console.log('id', id);
 
     return `This action returns a #${id} user`;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
+  update(id: string, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} user`;
   }
 
   findByUsername(username: string) {
-    // return this.userRepository.findOneBy({ username });
+    return this.userRepository.findOneBy({ username });
   }
 }

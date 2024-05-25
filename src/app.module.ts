@@ -16,7 +16,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       password: '123456',
       database: 'test',
       autoLoadEntities: true,
-      // synchronize: true,
+      synchronize: true, //todo 生产环境请关闭
       logging: true,
     }),
     UserModule,
