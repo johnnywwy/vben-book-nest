@@ -21,42 +21,47 @@ import { User } from './entities/user.entity';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
-  @ApiOperation({ summary: '创建新用户' })
-  @ApiResponse({ status: 201, description: '用户已成功创建。', type: User })
-  @ApiResponse({ status: 400, description: '请求参数错误。' })
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
-  }
+  // @Post()
+  // @ApiOperation({ summary: '创建新用户' })
+  // @ApiResponse({ status: 201, description: '用户已成功创建。', type: User })
+  // @ApiResponse({ status: 400, description: '请求参数错误。' })
+  // create(@Body() createUserDto: CreateUserDto) {
+  //   return this.userService.create(createUserDto);
+  // }
 
-  @Get()
-  @ApiOperation({ summary: '获取所有用户' })
-  @ApiResponse({ status: 200, description: '成功获取所有用户。', type: [User] })
-  findAll() {
-    return this.userService.findAll();
-  }
+  // @Get()
+  // @ApiOperation({ summary: '获取所有用户' })
+  // @ApiResponse({ status: 200, description: '成功获取所有用户。', type: [User] })
+  // findAll() {
+  //   return this.userService.findAll();
+  // }
 
-  @Get(':id')
-  @ApiOperation({ summary: '获取指定ID的用户' })
-  @ApiResponse({ status: 200, description: '成功获取用户。', type: User })
-  @ApiResponse({ status: 404, description: '用户未找到。' })
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(id);
-  }
+  // @Get(':id')
+  // @ApiOperation({ summary: '获取指定ID的用户' })
+  // @ApiResponse({ status: 200, description: '成功获取用户。', type: User })
+  // @ApiResponse({ status: 404, description: '用户未找到。' })
+  // findOne(@Param('id') id: string) {
+  //   return this.userService.findOne(id);
+  // }
 
-  @Patch(':id')
-  @ApiOperation({ summary: '更新指定ID的用户' })
-  @ApiResponse({ status: 200, description: '成功更新用户。', type: User })
-  @ApiResponse({ status: 404, description: '用户未找到。' })
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(id, updateUserDto);
-  }
+  // @Patch(':id')
+  // @ApiOperation({ summary: '更新指定ID的用户' })
+  // @ApiResponse({ status: 200, description: '成功更新用户。', type: User })
+  // @ApiResponse({ status: 404, description: '用户未找到。' })
+  // update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  //   return this.userService.update(id, updateUserDto);
+  // }
 
-  @Delete(':id')
-  @ApiOperation({ summary: '删除指定ID的用户' })
-  @ApiResponse({ status: 200, description: '成功删除用户。' })
-  @ApiResponse({ status: 404, description: '用户未找到。' })
-  remove(@Param('id') id: string) {
-    return this.userService.remove(id);
+  // @Delete(':id')
+  // @ApiOperation({ summary: '删除指定ID的用户' })
+  // @ApiResponse({ status: 200, description: '成功删除用户。' })
+  // @ApiResponse({ status: 404, description: '用户未找到。' })
+  // remove(@Param('id') id: string) {
+  //   return this.userService.remove(id);
+  // }
+
+  @Get('info')
+  getUserInfo() {
+    return 'user info';
   }
 }

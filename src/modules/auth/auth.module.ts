@@ -4,9 +4,16 @@ import { AuthController } from './auth.controller';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { UserModule } from '../user/user.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [UserModule],
+  imports: [
+    UserModule,
+    JwtModule.register({
+      secret: '0770a5fc8da9726e2e3b21da73463cf7c784063d',
+      signOptions: { expiresIn: '3600s' },
+    }),
+  ],
   controllers: [AuthController],
 
   //第一种 局部认证 在controller中使用 useGuards(AuthGuard)

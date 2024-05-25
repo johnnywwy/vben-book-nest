@@ -15,6 +15,7 @@ import { AuthService } from './auth.service';
 // import { UpdateAuthDto } from './dto/update-auth.dto';
 import { Public } from './public.decorator';
 import { HttpExceptionFilter } from 'src/exception/http-exception.filter';
+import { error, success } from 'src/utils';
 // import { Auth } from './entities/auth.entity'; // 假设你有一个 Auth 实体
 // import { AuthGuard } from 'src/guards/auth.guard';
 
@@ -35,9 +36,12 @@ export class AuthController {
       },
     },
   })
-  @ApiResponse({ status: 200, description: '登录成功。' })
+  @ApiResponse({ status: 201, description: '登录成功。' })
   @ApiResponse({ status: 401, description: '登录失败，用户名或密码错误。' })
   async login(@Body() params: { username: string; password: string }) {
-    return await this.authService.login(params.username, params.password);
+    return this.authService
+      .login(params.username, params.password)
+      .then((data) => success(data, '登录成功'))
+      .catch((err) => error(err.message));
   }
 }
