@@ -12,3 +12,13 @@ export function error(msg) {
     message: msg,
   };
 }
+
+export function wrapperResponse(p, msg) {
+  return p
+    .then((data) => {
+      return success(data, msg);
+    })
+    .catch((err) => {
+      return error(err.message);
+    });
+}

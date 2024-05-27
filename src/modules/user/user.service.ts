@@ -34,7 +34,7 @@ export class UserService {
     return `This action removes a #${id} user`;
   }
 
-  findByUsername(username: string) {
+  findByUsername(username: string): Promise<User> {
     return this.userRepository.findOneBy({ username });
   }
 }
