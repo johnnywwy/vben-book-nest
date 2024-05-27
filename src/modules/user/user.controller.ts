@@ -39,6 +39,7 @@ export class UserController {
   }
 
   @Get('info')
+  @ApiOperation({ summary: '查询用户信息' })
   getUserInfo(@Req() request) {
     console.log('呜啦啦啦啦啦', request.user);
     return wrapperResponse(
@@ -48,7 +49,7 @@ export class UserController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: '获取指定ID的用户' })
+  @ApiOperation({ summary: '查询用户' })
   @ApiResponse({ status: 200, description: '成功获取用户。', type: User })
   @ApiResponse({ status: 404, description: '用户未找到。' })
   findOne(@Param('id') id: string) {
@@ -56,7 +57,7 @@ export class UserController {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: '更新指定ID的用户' })
+  @ApiOperation({ summary: '更新用户' })
   @ApiResponse({ status: 200, description: '成功更新用户。', type: User })
   @ApiResponse({ status: 404, description: '用户未找到。' })
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
@@ -64,12 +65,10 @@ export class UserController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: '删除指定ID的用户' })
+  @ApiOperation({ summary: '删除用户' })
   @ApiResponse({ status: 200, description: '成功删除用户。' })
   @ApiResponse({ status: 404, description: '用户未找到。' })
   remove(@Param('id') id: string) {
     return this.userService.remove(id);
   }
-
- 
 }
