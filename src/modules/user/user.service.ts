@@ -13,7 +13,11 @@ export class UserService {
   ) {} // private readonly userRepository: Repository<User>
 
   create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+    // return 'This action adds a new user';
+    // 写入数据库
+    const res = this.userRepository.save(createUserDto);
+    console.log('写入数据库', res);
+    return res;
   }
 
   findAll() {

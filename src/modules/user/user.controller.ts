@@ -15,6 +15,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { wrapperResponse } from '../../utils/index';
+import { Public } from '../auth/public.decorator';
 // import { AuthGuard } from 'src/guards/auth.guard';
 
 @ApiTags('用户管理')
@@ -24,6 +25,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
+  @Public()
   @ApiOperation({ summary: '创建新用户' })
   @ApiResponse({ status: 201, description: '用户已成功创建。', type: User })
   @ApiResponse({ status: 400, description: '请求参数错误。' })
