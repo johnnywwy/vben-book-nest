@@ -1,9 +1,17 @@
+import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { CreateMenuDto } from './dto/create-menu.dto';
 import { UpdateMenuDto } from './dto/update-menu.dto';
+import { Menu } from './entities/menu.entity';
 
 @Injectable()
 export class MenuService {
+  constructor(
+    @InjectRepository(Menu)
+    private readonly menuRepository: Repository<Menu>,
+  ) {}
+
   create(createMenuDto: CreateMenuDto) {
     return 'This action adds a new menu';
   }
@@ -46,7 +54,8 @@ export class MenuService {
           "hideMenu": true
         }
       }]
-    }, {
+    }, 
+    {
       "path": "/dashboard",
       "name": "Dashboard",
       "redirect": "/dashboard/analysis",
@@ -61,13 +70,15 @@ export class MenuService {
         "meta": {
           "title": "routes.dashboard.analysis"
         }
-      }, {
+      }, 
+      {
         "path": "workbench",
         "name": "Workbench",
         "meta": {
           "title": "工作台"
         }
-      }, {
+      }, 
+      {
         "path": "front",
         "name": "PermissionFrontDemo",
         "meta": {
@@ -82,23 +93,15 @@ export class MenuService {
         }, {
           "path": "btn",
           "name": "FrontBtnAuth",
-          "meta": {
-            "title": "routes.demo.permission.frontBtn"
-          }
+          "meta": {"title": "routes.demo.permission.frontBtn"}
         }, {
           "path": "auth-pageA",
           "name": "FrontAuthPageA",
-          "meta": {
-            "title": "routes.demo.permission.frontTestA",
-            "roles": ["super"]
-          }
+          "meta": {"title": "routes.demo.permission.frontTestA","roles": ["super"]}
         }, {
           "path": "auth-pageB",
           "name": "FrontAuthPageB",
-          "meta": {
-            "title": "routes.demo.permission.frontTestB",
-            "roles": ["test"]
-          }
+          "meta": {"title": "routes.demo.permission.frontTestB","roles": ["test"]}
         }]
       }]
     },
@@ -141,6 +144,10 @@ export class MenuService {
         resolve(JSON.parse(str));
       }, 1000);
     });
+  }
+
+  findAll2() {
+    return this.menuRepository.find();
   }
 
   findOne(id: number) {

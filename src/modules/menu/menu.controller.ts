@@ -29,9 +29,7 @@ export class MenuController {
   @Public()
   @ApiOperation({ summary: '获取所有菜单' })
   findAll() {
-    // return this.menuService.findAll();
-
-    return wrapperResponse(this.menuService.findAll(), '获取所有菜单');
+    return wrapperResponse(this.menuService.findAll2(), '获取所有菜单');
   }
 
   @Get(':id')
