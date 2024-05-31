@@ -19,6 +19,7 @@ export class Menu {
 
   @Column({
     comment: '菜单图片',
+    nullable: true,
   })
   icon: string;
 

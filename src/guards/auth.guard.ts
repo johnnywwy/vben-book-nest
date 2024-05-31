@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
       context.getHandler(),
       context.getClass(),
     ]);
-    console.log('isPublic', isPublic);
+    // console.log('isPublic', isPublic);
 
     if (isPublic) {
       return true;
@@ -36,7 +36,7 @@ export class AuthGuard implements CanActivate {
       const payload = await this.jwtService.verifyAsync(token, {
         secret: '0770a5fc8da9726e2e3b21da73463cf7c784063d',
       });
-      console.log('payload', payload);
+      // console.log('payload', payload);
       request['user'] = payload;
     } catch {
       throw new UnauthorizedException();

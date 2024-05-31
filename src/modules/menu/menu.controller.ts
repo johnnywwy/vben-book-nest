@@ -3,9 +3,9 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
 import { MenuService } from './menu.service';
 import { CreateMenuDto } from './dto/create-menu.dto';
@@ -22,11 +22,13 @@ export class MenuController {
   @Post()
   @ApiOperation({ summary: '创建新菜单' })
   create(@Body() createMenuDto: CreateMenuDto) {
-    return this.menuService.create(createMenuDto);
+    return wrapperResponse(
+      this.menuService.create(createMenuDto),
+      '创建菜单成功',
+    );
   }
 
   @Get()
-  @Public()
   @ApiOperation({ summary: '获取所有菜单' })
   findAll() {
     return wrapperResponse(this.menuService.findAll2(), '获取所有菜单');
@@ -38,10 +40,14 @@ export class MenuController {
     return this.menuService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put()
   @ApiOperation({ summary: '更新菜单' }) // 更新菜单
-  update(@Param('id') id: string, @Body() updateMenuDto: UpdateMenuDto) {
-    return this.menuService.update(+id, updateMenuDto);
+  update(@Body() updateMenuDto: UpdateMenuDto) {
+    console.log('idddd1111111', updateMenuDto);
+    return wrapperResponse(
+      this.menuService.update(updateMenuDto),
+      '更新菜单成功',
+    );
   }
 
   @Delete(':id')

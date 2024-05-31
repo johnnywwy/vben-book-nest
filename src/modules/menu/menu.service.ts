@@ -12,8 +12,9 @@ export class MenuService {
     private readonly menuRepository: Repository<Menu>,
   ) {}
 
-  create(createMenuDto: CreateMenuDto) {
-    return 'This action adds a new menu';
+  async create(createMenuDto: CreateMenuDto) {
+    console.log('createMenuDto', createMenuDto);
+    return await this.menuRepository.save(createMenuDto);
   }
 
   findAll() {
@@ -154,8 +155,10 @@ export class MenuService {
     return `This action returns a #${id} menu`;
   }
 
-  update(id: number, updateMenuDto: UpdateMenuDto) {
-    return `This action updates a #${id} menu`;
+  update(updateMenuDto: UpdateMenuDto) {
+    const { id, ...rest } = updateMenuDto;
+    return this.menuRepository.update(id, rest);
+    // return `This action updates a #${id} menu`;
   }
 
   remove(id: number) {
