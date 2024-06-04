@@ -15,10 +15,6 @@ export function error(msg) {
 
 export function wrapperResponse(p, msg) {
   return p
-    .then((data) => {
-      return success(data, msg);
-    })
-    .catch((err) => {
-      return error(err.message);
-    });
+    .then((data) => success(data, msg))
+    .catch((err) => error(err.message));
 }

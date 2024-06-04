@@ -11,7 +11,7 @@ import { JwtModule } from '@nestjs/jwt';
     UserModule,
     JwtModule.register({
       secret: '0770a5fc8da9726e2e3b21da73463cf7c784063d',
-      signOptions: { expiresIn: '3600s' },
+      signOptions: { expiresIn: '24h' }, // token过期时间
     }),
   ],
   controllers: [AuthController],

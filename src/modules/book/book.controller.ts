@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
@@ -29,8 +30,8 @@ export class BookController {
   @Get()
   @ApiOperation({ summary: '获取所有图书' })
   @ApiResponse({ status: 200, description: '成功获取所有图书。', type: [Book] })
-  findAll() {
-    return this.bookService.findAll();
+  findAll(@Query() params) {
+    return this.bookService.findAll(params);
   }
 
   @Get(':id')

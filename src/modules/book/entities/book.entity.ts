@@ -2,8 +2,8 @@ import { Entity, Column, Unique, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('book')
 export class Book {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column()
   @Unique(['fileName'])
