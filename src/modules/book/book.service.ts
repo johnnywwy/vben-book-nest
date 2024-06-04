@@ -43,12 +43,27 @@ export class BookService {
       });
     }
 
-    return wrapperResponse(
-      queryBuilder.getMany(), // 执行查询
-      '获取成功',
-    );
+    return queryBuilder.getMany()
+
 
     // return this.bookRepository.find();
+  }
+
+  async countBookList(params: any = {}) {
+    const { title = '', author = '' } = params;
+    let where = 'where 1=1';
+    if (title) {
+      where += ` AND title LIKE '%${title}%'`;
+    }
+    if (author) {
+      where += ` AND author LIKE '%${author}%'`;
+    }
+    // const categoryAuth = await this.getCategoryAuth(userid);
+    // if (categoryAuth.length > 0) {
+    //   where += ` AND categoryText IN (${categoryAuth.join(',')})`;
+    // }
+    const sql = `select count(*) as count from book ${where}`;
+    return this.bookRepository.query(sql);
   }
 
   findOne(id: string) {

@@ -13,6 +13,7 @@ import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Book } from './entities/book.entity';
+import { wrapperCountResponse, wrapperResponse } from 'src/utils';
 
 @ApiTags('图书管理')
 @Controller('book')
@@ -31,7 +32,11 @@ export class BookController {
   @ApiOperation({ summary: '获取所有图书' })
   @ApiResponse({ status: 200, description: '成功获取所有图书。', type: [Book] })
   findAll(@Query() params) {
-    return this.bookService.findAll(params);
+    return wrapperResponse(
+      this.bookService.findAll(params),
+      // this.bookService.countBookList(params),
+      '获取图书列表成功',
+    );
   }
 
   @Get(':id')
