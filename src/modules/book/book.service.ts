@@ -15,7 +15,7 @@ export class BookService {
 
   create(createBookDto: CreateBookDto) {
     // return wrapperResponse(
-    //   this.bookRepository.save(createBookDto), // 保存到数据库
+    //   this.bookRepository.save(z), // 保存到数据库
     // )
     return 'This action adds a new book';
   }
@@ -43,8 +43,7 @@ export class BookService {
       });
     }
 
-    return queryBuilder.getMany()
-
+    return queryBuilder.getMany();
 
     // return this.bookRepository.find();
   }

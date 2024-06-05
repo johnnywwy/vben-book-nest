@@ -32,10 +32,10 @@ export class BookController {
   @ApiOperation({ summary: '获取所有图书' })
   @ApiResponse({ status: 200, description: '成功获取所有图书。', type: [Book] })
   findAll(@Query() params) {
-    return wrapperResponse(
+    return wrapperCountResponse(
       this.bookService.findAll(params),
-      // this.bookService.countBookList(params),
-      '获取图书列表成功',
+      this.bookService.countBookList(params),
+      '获取图书列表成功111',
     );
   }
 
