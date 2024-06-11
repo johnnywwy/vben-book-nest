@@ -22,7 +22,8 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const desPath = 'C:\\Users\\Administrator\\Desktop\\nginx\\html\\upload';
+// const desPath = 'C:\\Users\\Administrator\\Desktop\\nginx\\html\\upload';
+const desPath = '/opt/homebrew/var/www/upload';
 
 @ApiTags('图书管理')
 @Controller('book')
@@ -53,7 +54,6 @@ export class BookController {
     file: Express.Multer.File,
   ) {
     console.log('我是文件', file);
-    // const desPath = 'C:\\Users\\Administrator\\Desktop\\nginx\\html\\upload';
 
     fs.writeFileSync(path.resolve(desPath, file.originalname), file.buffer);
 
