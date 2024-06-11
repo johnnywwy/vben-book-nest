@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   Query,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
@@ -14,6 +16,7 @@ import { UpdateBookDto } from './dto/update-book.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Book } from './entities/book.entity';
 import { wrapperCountResponse, wrapperResponse } from 'src/utils';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('图书管理')
 @Controller('book')
@@ -26,6 +29,15 @@ export class BookController {
   @ApiResponse({ status: 400, description: '请求参数错误。' })
   create(@Body() createBookDto: CreateBookDto) {
     return this.bookService.create(createBookDto);
+  }
+
+  @Post('upload')
+  @ApiOperation({ summary: '上传文件' })
+  // @ApiResponse({ status: 200, description: '文件上传成功。', type: Book })
+  // @ApiResponse({ status: 400, description: '请求参数错误。' })
+  @UseInterceptors(FileInterceptor('file'))
+  uploadFile(@UploadedFile() file: Express.Multer.File) {
+    console.log('我是文件', file);
   }
 
   @Get()
