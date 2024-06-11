@@ -46,8 +46,7 @@ export class BookController {
     @UploadedFile(
       new ParseFilePipeBuilder()
         .addFileTypeValidator({
-          fileType:
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          fileType: 'epub',
         })
         .build(),
     )
@@ -63,6 +62,8 @@ export class BookController {
         originalname: file.originalname,
         path: file.path,
         size: file.size,
+        minetype: file.mimetype,
+        dir: desPath,
       })),
       '文件上传成功',
     );
