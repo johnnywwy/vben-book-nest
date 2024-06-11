@@ -9,6 +9,7 @@ import {
   Query,
   UseInterceptors,
   UploadedFile,
+  ParseFilePipeBuilder,
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
@@ -17,6 +18,11 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Book } from './entities/book.entity';
 import { wrapperCountResponse, wrapperResponse } from 'src/utils';
 import { FileInterceptor } from '@nestjs/platform-express';
+
+import * as fs from 'fs';
+import * as path from 'path';
+
+const desPath = 'C:\\Users\\Administrator\\Desktop\\nginx\\html\\upload';
 
 @ApiTags('图书管理')
 @Controller('book')
@@ -36,8 +42,30 @@ export class BookController {
   // @ApiResponse({ status: 200, description: '文件上传成功。', type: Book })
   // @ApiResponse({ status: 400, description: '请求参数错误。' })
   @UseInterceptors(FileInterceptor('file'))
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
+  uploadFile(
+    @UploadedFile(
+      new ParseFilePipeBuilder()
+        .addFileTypeValidator({
+          fileType:
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        })
+        .build(),
+    )
+    file: Express.Multer.File,
+  ) {
     console.log('我是文件', file);
+    // const desPath = 'C:\\Users\\Administrator\\Desktop\\nginx\\html\\upload';
+
+    fs.writeFileSync(path.resolve(desPath, file.originalname), file.buffer);
+
+    return wrapperResponse(
+      Promise.resolve().then(() => ({
+        originalname: file.originalname,
+        path: file.path,
+        size: file.size,
+      })),
+      '文件上传成功',
+    );
   }
 
   @Get()
