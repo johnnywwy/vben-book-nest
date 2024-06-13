@@ -19,12 +19,6 @@ import { Book } from './entities/book.entity';
 import { wrapperCountResponse, wrapperResponse } from 'src/utils';
 import { FileInterceptor } from '@nestjs/platform-express';
 
-import * as fs from 'fs';
-import * as path from 'path';
-
-// const desPath = 'C:\\Users\\Administrator\\Desktop\\nginx\\html\\upload';
-const desPath = '/opt/homebrew/var/www/upload';
-
 @ApiTags('图书管理')
 @Controller('book')
 export class BookController {
@@ -53,20 +47,7 @@ export class BookController {
     )
     file: Express.Multer.File,
   ) {
-    console.log('我是文件', file);
-
-    fs.writeFileSync(path.resolve(desPath, file.originalname), file.buffer);
-
-    return wrapperResponse(
-      Promise.resolve().then(() => ({
-        originalname: file.originalname,
-        path: file.path,
-        size: file.size,
-        minetype: file.mimetype,
-        dir: desPath,
-      })),
-      '文件上传成功',
-    );
+    return wrapperResponse(this.bookService.uploadBook(file), '文件上传成功');
   }
 
   @Get()

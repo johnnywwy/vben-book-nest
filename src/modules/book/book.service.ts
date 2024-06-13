@@ -6,7 +6,11 @@ import { Book } from './entities/book.entity';
 import { Repository } from 'typeorm';
 import { wrapperResponse } from 'src/utils';
 
+import * as fs from 'fs';
+import * as path from 'path';
+import Epubbook from './epub-book';
 
+// const desPath = 'C:\\Users\\Administrator\\Desktop\\nginx\\html\\upload'; pc
 
 @Injectable()
 export class BookService {
@@ -77,5 +81,31 @@ export class BookService {
 
   remove(id: string) {
     return `This action removes a #${id} book`;
+  }
+
+  uploadBook(file) {
+    // console.log('我是文件', file);
+    // const destPath = 'C:\\Users\\Administrator\\Desktop\\nginx\\html\\upload'; //pc todo
+    const destPath = '/opt/homebrew/var/www/upload'; //mac todo
+
+    fs.writeFileSync(path.resolve(destPath, file.originalname), file.buffer);
+
+    // 电子书解析
+
+    this.parseBook(destPath, file);
+
+    return Promise.resolve().then(() => ({
+      originalname: file.originalname,
+      path: file.path,
+      size: file.size,
+      minetype: file.mimetype,
+      dir: destPath,
+    }));
+  }
+
+  parseBook(bookPath, file) {
+    // 电子书解析
+    const epub = new Epubbook(bookPath, file);
+    epub.parse();
   }
 }
