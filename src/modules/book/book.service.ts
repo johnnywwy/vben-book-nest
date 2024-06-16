@@ -85,8 +85,8 @@ export class BookService {
 
   uploadBook(file) {
     // console.log('我是文件', file);
-    // const destPath = 'C:\\Users\\Administrator\\Desktop\\nginx\\html\\upload'; //pc todo
-    const destPath = '/opt/homebrew/var/www/upload'; //mac todo
+    const destPath = 'C:\\Users\\Administrator\\Desktop\\nginx\\html\\upload'; //pc todo
+    // const destPath = '/opt/homebrew/var/www/upload'; //mac todo
 
     fs.writeFileSync(path.resolve(destPath, file.originalname), file.buffer);
 
