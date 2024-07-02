@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import * as os from 'os';
+import { unzip, parseRootFile } from './epub-parse';
 
 const TEMP_PATH = 'Desktop\\nginx\\html\\vben\\tmp-book';
 
@@ -16,7 +17,7 @@ class Epubbook {
     this._fileName = file.originalname;
   }
 
-  parse() {
+  async parse() {
     console.log('解析电子书111', this._filePath, this._file);
     // 1、生成临时文件
     const homedir = os.homedir();
@@ -29,16 +30,27 @@ class Epubbook {
     console.log('tmpFile', tmpFile);
     const sourceFile = path.join(this._filePath, this._fileName);
 
-    // 2. 复制
-    // const sourceFile = path.join(this._filePath, this._file.originalname);
-
-    // fs.copyFileSync()
-    // 2、复制
-    // fs.copyFileSync(this._filePath, tmpFile);
     console.log('sourceFile', sourceFile);
 
-    // 2. 写入文件
+    // 2. 复制文件
     fs.copyFileSync(sourceFile, tmpFile);
+
+    // 3. 创建临时解压目录
+    const tmpUnzipDirName = this._fileName.replace('.epub', '');
+    const tmpUnzipDir = path.resolve(tmpDir, tmpUnzipDirName);
+
+    console.log('tmpUnzipDir', tmpUnzipDir);
+
+    fs.mkdirSync(tmpUnzipDir);
+
+    // 4. 解压文件
+    unzip(sourceFile, tmpUnzipDir);
+
+    await parseRootFile(tmpUnzipDir);
+
+    // n. 删除临时文件
+    // fs.unlinkSync(tmpFile);
+    // fs.rmdirSync(tmpUnzipDir);
   }
 }
 

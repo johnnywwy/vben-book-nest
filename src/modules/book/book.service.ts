@@ -106,6 +106,6 @@ export class BookService {
   parseBook(bookPath, file) {
     // 电子书解析
     const epub = new Epubbook(bookPath, file);
-    epub.parse();
+    return epub.parse();
   }
 }
