@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import * as os from 'os';
-import { unzip, parseRootFile } from './epub-parse';
+import { unzip, parseRootFile, parseConentOpf } from './epub-parse';
 
 const TEMP_PATH = 'Desktop\\nginx\\html\\vben\\tmp-book';
 
@@ -41,12 +41,23 @@ class Epubbook {
 
     console.log('tmpUnzipDir', tmpUnzipDir);
 
+    // 检查目录是否存在
+    if (fs.existsSync(tmpUnzipDir)) {
+      // 删除目录及其内容
+      fs.rmSync(tmpUnzipDir, { recursive: true, force: true });
+    }
+
+    // 创建目录
     fs.mkdirSync(tmpUnzipDir);
 
     // 4. 解压文件
     unzip(sourceFile, tmpUnzipDir);
 
-    await parseRootFile(tmpUnzipDir);
+    const rootFile = await parseRootFile(tmpUnzipDir);
+
+    console.log('rootFile', rootFile);
+
+    await parseConentOpf(tmpUnzipDir, rootFile);
 
     // n. 删除临时文件
     // fs.unlinkSync(tmpFile);
